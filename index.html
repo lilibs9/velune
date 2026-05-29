@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" id="html-root">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="VELUNE — Luxury Feminine Fashion Boutique"/>
+<title>VELUNE — بوتيك فيلون</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+
+<!-- Supabase JS Client -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.47.0/dist/module/index.js" type="module"></script>
+
+<!-- Initialize Supabase -->
+<script type="module">
+  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.47.0/dist/module/index.js';
+  
+  const SUPABASE_URL = 'https://ucjlriaeeriucojqedur.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_kToD-IgkG4VFtHo3-ADeag_r1t84fMh';
+  
+  window.supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+  window.supabaseReady = true;
+  document.dispatchEvent(new Event('supabaseReady'));
+</script>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --plum:#6B1E8C;
+  --violet:#8D14AB;
+  --lavender:#C084FC;
+  --soft-lav:#EDE0F5;
+  --blush:#FFC0F7;
+  --blush-light:#FFE8FC;
+  --deep-violet:#3D0F52;
+  --dusty:#E8A0D8;
+  --cream:#FAF5FF;
+  --mid-purple:#B561D4;
+  --text-dark:#2D1040;
+  --text-mid:#6B4E7E;
+  --text-soft:#A882C0;
+  --white:#FFFFFF;
+  --r-sm:8px;--r-md:14px;--r-lg:22px;--r-xl:32px;
+}
+
+[dir="rtl"] body { font-family:'Tajawal',sans-serif; }
+[dir="ltr"] body { font-family:'Jost',sans-serif; }
+[dir="rtl"] .serif,[dir="rtl"] h1,[dir="rtl"] h2,[dir="rtl"] h3 { font-family:'Tajawal',sans-serif; font-weight:700; font-style:normal; }
+[dir="ltr"] .serif,[dir="ltr"] h1,[dir="ltr"] h2,[dir="ltr"] h3 { font-family:'Cormorant Garamond',serif; }
+
+body{background:var(--cream);color:var(--text-dark);min-height:100vh;overflow-x:hidden;transition:direction .3s}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--blush-light)}::-webkit-scrollbar-thumb{background:var(--lavender);border-radius:10px}
+
+/* ── NAV ── */
+nav{position:sticky;top:0;z-index:100;background:rgba(250,245,255,0.94);backdrop-filter:blur(18px);border-bottom:1px solid rgba(176,130,210,0.18);padding:0 5vw}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px;max-width:1280px;margin:0 auto;gap:12px}
+.logo-wrap{display:flex;align-items:center;gap:10px;cursor:pointer;flex-shrink:0}
+.logo-circle{width:38px;height:38px;border-radius:50%;border:2.5px solid var(--violet);display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--blush-light),var(--soft-lav))}
+.logo-text{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;letter-spacing:0.12em;color:var(--violet)}
+[dir="rtl"] .logo-text{font-family:'Tajawal',sans-serif;letter-spacing:0}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{font-size:13px;letter-spacing:0.06em;color:var(--text-mid);text-decoration:none;font-weight:400;transition:color .2s;cursor:pointer}
+.nav-links a:hover{color:var(--violet)}
+.nav-right{display:flex;align-items:center;gap:10px}
+
+/* Language Toggle */
+.lang-toggle{display:flex;align-items:center;background:var(--soft-lav);border-radius:var(--r-xl);padding:3px;gap:2px;border:1px solid rgba(176,130,210,0.25)}
+.lang-btn{padding:5px 13px;border-radius:var(--r-xl);border:none;background:none;font-size:12px;cursor:pointer;transition:all .22s;font-weight:500;color:var(--text-mid);font-family:inherit}
+.lang-btn.active{background:var(--violet);color:#fff}
+.lang-btn.ar{font-family:'Tajawal',sans-serif}
+
+.nav-icon-btn{background:none;border:none;cursor:pointer;color:var(--text-mid);width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:all .2s}
+.nav-icon-btn:hover{background:var(--soft-lav);color:var(--violet)}
+
+/* Mobile menu */
+.mobile-menu{display:none;position:fixed;inset:0;background:rgba(45,16,64,0.6);backdrop-filter:blur(8px);z-index:200;align-items:flex-end}
+.mobile-menu.open{display:flex}
+.mobile-menu-inner{background:#fff;width:100%;border-radius:var(--r-lg) var(--r-lg) 0 0;padding:28px 24px 40px;display:flex;flex-direction:column;gap:6px}
+.mobile-menu-link{padding:14px 0;font-size:18px;color:var(--text-dark);border-bottom:1px solid rgba(176,130,210,0.12);cursor:pointer;display:flex;align-items:center;gap:10px}
+[dir="rtl"] .mobile-menu-link{font-family:'Tajawal',sans-serif}
+.mobile-menu-link:last-child{border-bottom:none}
+
+/* ── HERO ── */
+.hero{min-height:88vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:60px 5vw;position:relative;background:linear-gradient(160deg,var(--blush-light) 0%,var(--soft-lav) 50%,var(--cream) 100%);overflow:hidden}
+.hero::before{content:'';position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(255,192,247,0.35) 0%,transparent 70%);top:-150px;right:-150px;pointer-events:none}
+.hero::after{content:'';position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(141,20,171,0.1) 0%,transparent 70%);bottom:-100px;left:-100px;pointer-events:none}
+.hero-content{position:relative;z-index:2;max-width:540px;margin:0 auto}
+.hero-eyebrow{font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-soft);margin-bottom:12px;font-weight:500}
+[dir="rtl"] .hero-eyebrow{font-family:'Tajawal',sans-serif;font-size:13px}
+h1{font-size:68px;line-height:1.1;margin-bottom:20px;color:var(--text-dark);font-weight:400;letter-spacing:-0.015em}
+[dir="rtl"] h1{font-family:'Tajawal',sans-serif;font-size:48px;font-weight:700}
+h1 span{color:var(--violet);font-style:italic;font-weight:600}
+[dir="rtl"] h1 span{font-style:normal;font-weight:700}
+.hero-sub{font-size:16px;line-height:1.65;color:var(--text-mid);margin-bottom:32px;font-weight:300}
+[dir="rtl"] .hero-sub{font-family:'Tajawal',sans-serif;font-size:15px;font-weight:400}
+
+/* Buttons */
+.btn-primary{padding:14px 32px;border:none;background:linear-gradient(135deg,var(--plum),var(--violet));color:#fff;border-radius:var(--r-lg);font-size:14px;font-weight:600;cursor:pointer;transition:all .3s;letter-spacing:0.05em;font-family:inherit;text-transform:uppercase}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(141,20,171,0.25)}
+.btn-outline{padding:14px 32px;border:1.5px solid var(--violet);background:transparent;color:var(--violet);border-radius:var(--r-lg);font-size:14px;font-weight:600;cursor:pointer;transition:all .3s;letter-spacing:0.05em;margin-inline-start:12px;font-family:inherit;text-transform:uppercase}
+.btn-outline:hover{background:var(--soft-lav)}
+
+/* ── ORDER BANNER ── */
+.order-banner{background:linear-gradient(135deg,rgba(141,20,171,0.08) 0%,rgba(192,132,252,0.08) 100%);padding:48px 5vw;border-top:1px solid rgba(176,130,210,0.15);border-bottom:1px solid rgba(176,130,210,0.15)}
+.order-banner-inner{max-width:1280px;margin:0 auto;text-align:center}
+.order-eyebrow{font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-soft);margin-bottom:12px;font-weight:500}
+[dir="rtl"] .order-eyebrow{font-family:'Tajawal',sans-serif;font-size:13px}
+.order-title{font-size:20px;color:var(--text-dark);margin-bottom:22px;line-height:1.5;font-weight:400}
+[dir="rtl"] .order-title{font-family:'Tajawal',sans-serif;font-size:18px;font-weight:500}
+.wa-pill{display:inline-flex;align-items:center;gap:10px;background:var(--soft-lav);padding:12px 20px;border-radius:var(--r-xl);cursor:pointer;transition:all .25s;border:1px solid rgba(176,130,210,0.3)}
+.wa-pill:hover{background:var(--blush-light)}
+.wa-dot{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--violet),var(--plum));display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;font-weight:700}
+.wa-pill span{color:var(--text-dark);font-weight:500;font-size:14px}
+
+/* ── PRODUCTS SECTION ── */
+.products-section{padding:80px 5vw;background:#fff}
+.section-header{text-align:center;margin-bottom:48px}
+.section-eyebrow{font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-soft);margin-bottom:8px;font-weight:500}
+[dir="rtl"] .section-eyebrow{font-family:'Tajawal',sans-serif;font-size:13px}
+.section-title{font-size:52px;color:var(--text-dark);margin-bottom:16px;font-weight:400;letter-spacing:-0.015em}
+[dir="rtl"] .section-title{font-family:'Tajawal',sans-serif;font-size:36px;font-weight:700}
+.section-divider{width:32px;height:2px;background:var(--lavender);margin:0 auto}
+
+/* Filters */
+.filters-row{display:flex;gap:12px;justify-content:center;margin-bottom:40px;flex-wrap:wrap}
+.filter-btn{padding:8px 18px;border:1.5px solid rgba(176,130,210,0.3);background:transparent;color:var(--text-mid);border-radius:var(--r-lg);font-size:13px;cursor:pointer;transition:all .2s;font-weight:500;font-family:inherit}
+.filter-btn:hover,.filter-btn.active{background:var(--violet);border-color:var(--violet);color:#fff}
+
+/* Products Grid */
+.products-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;max-width:1280px;margin:0 auto}
+.product-card{background:#fff;border:1px solid rgba(176,130,210,0.1);border-radius:var(--r-lg);overflow:hidden;cursor:pointer;transition:all .3s;position:relative}
+.product-card:hover{transform:translateY(-6px);box-shadow:0 12px 32px rgba(141,20,171,0.12)}
+.product-card.sold-card{opacity:0.6;filter:saturate(0.4)}
+.product-card.sold-card:hover{opacity:0.75;filter:saturate(0.5)}
+.img-wrap{position:relative;width:100%;aspect-ratio:1;overflow:hidden;background:var(--blush-light);display:flex;align-items:center;justify-content:center}
+.img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
+.product-card:hover .img-wrap img{transform:scale(1.05)}
+.img-placeholder{font-size:48px}
+.sold-badge{position:absolute;top:12px;inset-inline-start:12px;background:rgba(0,0,0,0.7);color:#fff;padding:6px 12px;border-radius:var(--r-md);font-size:11px;font-weight:700;letter-spacing:0.1em;z-index:2}
+.qv-btn{position:absolute;bottom:12px;inset-inline-start:12px;inset-inline-end:12px;background:rgba(0,0,0,0.8);color:#fff;border:none;padding:10px 16px;border-radius:var(--r-md);font-size:12px;font-weight:600;cursor:pointer;opacity:0;transition:opacity .2s;font-family:inherit}
+.product-card:hover .qv-btn{opacity:1}
+.p-info{padding:16px}
+.p-id{font-size:11px;letter-spacing:0.1em;color:var(--text-soft);text-transform:uppercase;margin-bottom:4px}
+[dir="rtl"] .p-id{font-family:'Tajawal',sans-serif;font-size:10px}
+.p-name{font-size:15px;color:var(--text-dark);font-weight:500;margin-bottom:10px;line-height:1.3}
+[dir="rtl"] .p-name{font-family:'Tajawal',sans-serif;font-size:14px}
+.p-footer{display:flex;justify-content:space-between;align-items:center}
+.p-price{font-size:14px;color:var(--violet);font-weight:600}
+[dir="rtl"] .p-price{font-family:'Tajawal',sans-serif}
+.p-status{font-size:11px;padding:4px 8px;border-radius:var(--r-sm);font-weight:600}
+.p-status.s-avail{background:rgba(192,132,252,0.15);color:var(--violet)}
+.p-status.s-sold{background:rgba(192,80,80,0.15);color:#c05050}
+
+/* Sold Section */
+.sold-section{padding:80px 5vw;background:var(--blush-light)}
+.sold-section.hidden{display:none}
+.sold-section-inner{max-width:1280px;margin:0 auto}
+
+/* MODAL */
+#modal{position:fixed;inset:0;background:rgba(45,16,64,0.4);backdrop-filter:blur(6px);z-index:300;display:none;align-items:center;justify-content:center;padding:20px}
+#modal.open{display:flex}
+.modal-box{background:#fff;border-radius:var(--r-lg);display:grid;grid-template-columns:1fr 1fr;overflow:hidden;max-height:90vh;max-width:900px;width:100%}
+.modal-gallery{background:var(--blush-light);display:flex;flex-direction:column;padding:0}
+#modal-main-img{flex:1;display:flex;align-items:center;justify-content:center;background:var(--soft-lav)}
+.modal-thumbs{display:flex;gap:8px;padding:16px;overflow-x:auto;background:#fff}
+.modal-thumb{width:60px;height:60px;border-radius:var(--r-md);overflow:hidden;cursor:pointer;border:2px solid transparent;transition:all .2s;flex-shrink:0}
+.modal-thumb img{width:100%;height:100%;object-fit:cover}
+.modal-thumb.active{border-color:var(--violet)}
+.modal-details{padding:28px;display:flex;flex-direction:column;overflow-y:auto}
+.modal-header{margin-bottom:20px}
+.modal-id{font-size:11px;letter-spacing:0.1em;color:var(--text-soft);text-transform:uppercase;margin-bottom:6px}
+[dir="rtl"] .modal-id{font-family:'Tajawal',sans-serif}
+.modal-title{font-size:28px;color:var(--text-dark);font-weight:400;margin-bottom:12px}
+[dir="rtl"] .modal-title{font-family:'Tajawal',sans-serif;font-size:24px;font-weight:700}
+.modal-status-badge{display:inline-flex;width:fit-content;padding:6px 12px;border-radius:var(--r-md);font-size:12px;font-weight:600;margin-bottom:16px}
+.modal-status-badge.s-avail{background:rgba(192,132,252,0.15);color:var(--violet)}
+.modal-status-badge.s-sold{background:rgba(192,80,80,0.15);color:#c05050}
+.modal-price{font-size:18px;color:var(--violet);font-weight:600;margin-bottom:20px}
+[dir="rtl"] .modal-price{font-family:'Tajawal',sans-serif}
+.modal-meas-wrap{margin-bottom:20px}
+.modal-meas-wrap.hidden{display:none}
+.meas-title{font-size:13px;font-weight:600;color:var(--text-dark);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.05em}
+[dir="rtl"] .meas-title{font-family:'Tajawal',sans-serif}
+#modal-meas-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.meas-item{padding:12px;background:var(--soft-lav);border-radius:var(--r-md);text-align:center}
+.meas-label{font-size:11px;color:var(--text-soft);margin-bottom:4px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em}
+[dir="rtl"] .meas-label{font-family:'Tajawal',sans-serif}
+.meas-val{font-size:14px;color:var(--violet);font-weight:600}
+[dir="rtl"] .meas-val{font-family:'Tajawal',sans-serif}
+.modal-notes-wrap{margin-bottom:20px}
+.modal-notes-wrap.hidden{display:none}
+.notes-title{font-size:12px;font-weight:600;color:var(--text-dark);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.05em}
+[dir="rtl"] .notes-title{font-family:'Tajawal',sans-serif}
+#modal-notes-text{font-size:13px;color:var(--text-mid);line-height:1.5;font-style:italic}
+[dir="rtl"] #modal-notes-text{font-family:'Tajawal',sans-serif;font-style:normal}
+.modal-close{position:absolute;top:16px;inset-inline-end:16px;width:32px;height:32px;background:rgba(0,0,0,0.1);border:none;border-radius:50%;cursor:pointer;color:var(--text-dark);font-size:20px;transition:all .2s;display:flex;align-items:center;justify-content:center}
+.modal-close:hover{background:rgba(0,0,0,0.2)}
+
+/* ── ADMIN LOGIN ── */
+.admin-login-view{position:fixed;inset:0;background:linear-gradient(135deg,var(--blush-light) 0%,var(--soft-lav) 100%);z-index:400;display:none;align-items:center;justify-content:center;padding:20px}
+.admin-login-view.show{display:flex}
+.login-card{background:#fff;border-radius:var(--r-xl);padding:48px 36px;max-width:400px;width:100%;box-shadow:0 16px 48px rgba(141,20,171,0.15)}
+.login-title{font-size:28px;color:var(--text-dark);margin-bottom:8px;font-weight:400}
+[dir="rtl"] .login-title{font-family:'Tajawal',sans-serif;font-size:24px;font-weight:700}
+.login-sub{font-size:13px;color:var(--text-mid);margin-bottom:28px}
+[dir="rtl"] .login-sub{font-family:'Tajawal',sans-serif;font-size:14px}
+.form-group{margin-bottom:18px}
+.form-label{display:block;font-size:12px;font-weight:600;color:var(--text-dark);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.05em}
+[dir="rtl"] .form-label{font-family:'Tajawal',sans-serif}
+.form-input{width:100%;padding:12px 14px;border:1px solid rgba(176,130,210,0.25);border-radius:var(--r-md);font-size:14px;font-family:inherit;transition:all .2s;color:var(--text-dark)}
+.form-input:focus{outline:none;border-color:var(--violet);box-shadow:0 0 0 3px rgba(141,20,171,0.1)}
+#l-error{font-size:12px;color:#c05050;margin-bottom:12px;display:none;text-align:center}
+#l-error.show{display:block}
+.login-btn{width:100%;padding:12px;background:linear-gradient(135deg,var(--plum),var(--violet));color:#fff;border:none;border-radius:var(--r-lg);font-size:14px;font-weight:600;cursor:pointer;transition:all .3s;text-transform:uppercase;font-family:inherit;letter-spacing:0.05em}
+.login-btn:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(141,20,171,0.25)}
+.login-back{text-align:center;margin-top:16px}
+.login-back a{color:var(--violet);font-size:13px;text-decoration:none;cursor:pointer;transition:color .2s}
+.login-back a:hover{color:var(--plum)}
+
+/* ── ADMIN DASHBOARD ── */
+.admin-dashboard-view{position:fixed;inset:0;background:#f8f5ff;z-index:400;display:none;flex-direction:row;overflow:hidden}
+.admin-dashboard-view.show{display:flex}
+.admin-sidebar{background:linear-gradient(180deg,var(--deep-violet) 0%,var(--plum) 100%);color:#fff;width:240px;display:flex;flex-direction:column;border-inset:1px solid rgba(255,255,255,0.1);overflow-y:auto}
+.admin-logo-area{padding:20px 16px;border-bottom:1px solid rgba(255,255,255,0.1);flex-shrink:0}
+.admin-logo{font-size:20px;font-weight:600;letter-spacing:0.08em;display:flex;align-items:center;gap:8px}
+.a-nav{display:flex;flex-direction:column;padding:16px 0;flex:1;overflow-y:auto}
+.a-nav-item{display:flex;align-items:center;gap:12px;padding:14px 16px;color:rgba(255,255,255,0.6);cursor:pointer;transition:all .2s;font-size:13px;font-weight:500;border-inline-start:3px solid transparent}
+.a-nav-item:hover{color:#fff;background:rgba(255,255,255,0.05)}
+.a-nav-item.active{color:#fff;background:rgba(255,255,255,0.1);border-inline-start-color:var(--blush)}
+.a-nav-item svg{width:18px;height:18px;stroke-width:1.5}
+.a-logout{padding:16px;border-top:1px solid rgba(255,255,255,0.1);flex-shrink:0}
+.admin-content{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.admin-top-bar{background:#fff;border-bottom:1px solid rgba(176,130,210,0.1);padding:16px 24px;display:flex;justify-content:space-between;align-items:center}
+.admin-user-info{display:flex;align-items:center;gap:12px}
+.admin-user-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--blush),var(--lavender));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;font-size:14px}
+.admin-pages{flex:1;overflow-y:auto;padding:24px;display:flex;flex-direction:column;gap:20px}
+.admin-page{display:none}
+.admin-page.active{display:contents}
+.a-page-header{margin-bottom:24px}
+.a-page-title{font-size:24px;color:var(--text-dark);font-weight:400;margin-bottom:6px}
+[dir="rtl"] .a-page-title{font-family:'Tajawal',sans-serif;font-size:20px;font-weight:700}
+.a-page-sub{font-size:14px;color:var(--text-mid)}
+[dir="rtl"] .a-page-sub{font-family:'Tajawal',sans-serif}
+.a-card{background:#fff;border-radius:var(--r-lg);border:1px solid rgba(176,130,210,0.1);padding:24px}
+
+/* Stats */
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px}
+.stat-tile{background:#fff;border:1px solid rgba(176,130,210,0.1);border-radius:var(--r-lg);padding:24px;text-align:center;transition:all .2s}
+.stat-tile:hover{box-shadow:0 4px 12px rgba(141,20,171,0.08)}
+.stat-num{font-size:32px;font-weight:600;color:var(--violet);margin-bottom:6px}
+.stat-lbl{font-size:13px;color:var(--text-mid);font-weight:500}
+[dir="rtl"] .stat-lbl{font-family:'Tajawal',sans-serif}
+
+/* Tables */
+.a-table{width:100%;border-collapse:collapse;font-size:13px}
+[dir="rtl"] .a-table{font-family:'Tajawal',sans-serif}
+.a-table th{background:var(--soft-lav);padding:12px;text-align:inset-start;font-weight:600;color:var(--text-dark);border-bottom:1px solid rgba(176,130,210,0.2)}
+.a-table td{padding:12px;border-bottom:1px solid rgba(176,130,210,0.1)}
+.a-table tr:hover{background:rgba(192,132,252,0.03)}
+.tbl-thumb{width:40px;height:40px;object-fit:cover;border-radius:var(--r-sm)}
+
+/* Form Inputs */
+.form-select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath fill='%238D14AB' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:32px;cursor:pointer}
+.form-textarea{resize:vertical;min-height:100px;font-family:inherit}
+.form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:600px){.form-row-2{grid-template-columns:1fr}}
+
+/* Upload Area */
+.upload-area{border:2px dashed rgba(141,20,171,0.3);border-radius:var(--r-lg);padding:32px 20px;text-align:center;cursor:pointer;transition:all .2s;background:rgba(237,224,245,0.3)}
+.upload-area:hover{border-color:var(--violet);background:rgba(237,224,245,0.6)}
+.upload-icon{font-size:32px;margin-bottom:8px}
+.upload-text{font-size:13px;color:var(--text-mid);font-weight:500}
+[dir="rtl"] .upload-text{font-family:'Tajawal',sans-serif}
+.preview-strip{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap}
+.prev-wrap{position:relative;width:80px;height:80px}
+.prev-wrap img{width:100%;height:100%;object-fit:cover;border-radius:9px}
+.prev-rm{position:absolute;top:-6px;inset-inline-end:-6px;width:19px;height:19px;background:var(--plum);color:#fff;border-radius:50%;border:none;cursor:pointer;font-size:10px;display:flex;align-items:center;justify-content:center}
+
+/* Action Row */
+.action-row{display:flex;gap:6px;flex-wrap:wrap}
+.act-btn{padding:6px 12px;border:1px solid rgba(176,130,210,0.3);background:transparent;color:var(--violet);border-radius:var(--r-sm);font-size:11px;cursor:pointer;transition:all .2s;font-weight:600}
+.act-btn:hover{background:var(--soft-lav)}
+.btn-toggle{padding:6px 12px;border:none;border-radius:var(--r-sm);font-size:11px;cursor:pointer;transition:all .2s;font-weight:600}
+.btn-toggle.tgl-sold{background:rgba(192,80,80,0.1);color:#c05050}
+.btn-toggle.tgl-avail{background:rgba(192,132,252,0.1);color:var(--violet)}
+.btn-del{color:#c05050;border-color:rgba(192,80,80,0.3)}
+.btn-del:hover{background:rgba(192,80,80,0.1)}
+
+/* FOOTER */
+footer{background:var(--deep-violet);padding:52px 5vw 24px;color:rgba(255,255,255,0.65)}
+.footer-inner{max-width:1280px;margin:0 auto}
+.foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:44px;margin-bottom:44px}
+.foot-brand{font-size:30px;color:#fff;font-weight:300;font-style:italic;margin-bottom:12px;font-family:'Cormorant Garamond',serif}
+[dir="rtl"] .foot-brand{font-family:'Tajawal',sans-serif;font-style:normal;font-weight:700}
+.foot-desc{font-size:13px;line-height:1.85;color:rgba(255,255,255,0.5)}
+[dir="rtl"] .foot-desc{font-family:'Tajawal',sans-serif;font-size:14px}
+.foot-col-title{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--blush);margin-bottom:15px}
+[dir="rtl"] .foot-col-title{letter-spacing:0.03em;font-family:'Tajawal',sans-serif;font-size:11px}
+.foot-links{list-style:none;display:flex;flex-direction:column;gap:10px}
+.foot-links li{font-size:13px;color:rgba(255,255,255,0.5);cursor:pointer;transition:color .2s}
+[dir="rtl"] .foot-links li{font-family:'Tajawal',sans-serif;font-size:14px}
+.foot-links li:hover{color:var(--blush)}
+.foot-bottom{border-top:1px solid rgba(255,255,255,0.1);padding-top:20px;display:flex;align-items:center;justify-content:space-between;font-size:12px;color:rgba(255,255,255,0.3)}
+[dir="rtl"] .foot-bottom{font-family:'Tajawal',sans-serif;font-size:13px}
+
+/* TOAST */
+.toast{position:fixed;bottom:24px;inset-inline-end:24px;background:var(--deep-violet);color:#fff;padding:14px 24px;border-radius:var(--r-md);font-size:13px;z-index:500;transform:translateY(20px);opacity:0;transition:all .3s;max-width:320px;pointer-events:none}
+[dir="rtl"] .toast{font-family:'Tajawal',sans-serif;font-size:14px}
+.toast.show{opacity:1;transform:translateY(0)}
+.toast.success{background:linear-gradient(135deg,var(--plum),var(--violet))}
+.toast.error{background:linear-gradient(135deg,#c0392b,#922b21)}
+
+/* BADGES */
+.badge{display:inline-block;padding:4px 8px;border-radius:var(--r-sm);font-size:11px;font-weight:600}
+.badge-avail{background:rgba(192,132,252,0.15);color:var(--violet)}
+.badge-sold{background:rgba(192,80,80,0.15);color:#c05050}
+
+/* EMPTY STATE */
+.empty-state{text-align:center;padding:60px 20px;color:var(--text-soft)}
+.empty-icon{font-size:48px;margin-bottom:14px;display:block}
+.empty-msg{font-size:16px}
+[dir="rtl"] .empty-state{font-family:'Tajawal',sans-serif}
+
+/* HIDDEN */
+.hidden{display:none!important}
+.hamburger-btn{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:5px}
+.hamburger-btn span{width:22px;height:1.5px;background:var(--violet);display:block}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .modal-box{grid-template-columns:1fr}
+  .modal-gallery{padding-bottom:0}
+  .modal-details{padding:18px 22px 26px}
+  .admin-dashboard-view{flex-direction:column}
+  .admin-sidebar{width:100%;flex-direction:row;align-items:stretch;height:auto}
+  .admin-logo-area{padding:12px 16px;border-bottom:none;border-inline-end:1px solid rgba(255,255,255,0.1)}
+  .a-nav{display:flex;flex-direction:row;padding:0;overflow-x:auto;flex:1}
+  .a-nav-item{border-inline-start:none;border-bottom:3px solid transparent;padding:14px 12px;flex-shrink:0;white-space:nowrap;font-size:12px}
+  .a-nav-item.active{border-bottom-color:var(--blush);border-inline-start:none}
+  .a-logout{padding:12px 16px;border-top:none;border-inline-start:1px solid rgba(255,255,255,0.1)}
+  .admin-pages{padding:18px;padding-bottom:0}
+  .foot-grid{grid-template-columns:1fr;gap:28px}
+  .foot-bottom{flex-direction:column;gap:6px;text-align:center}
+  .nav-links{display:none}
+  .hamburger-btn{display:flex!important}
+  .stat-grid{grid-template-columns:1fr}
+  #modal-meas-grid{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .products-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+  .modal-box{max-height:100vh;border-radius:var(--r-md) var(--r-md) 0 0;align-self:flex-end}
+  .login-card{padding:32px 24px}
+  .form-row-2{grid-template-columns:1fr}
+}
+
+/* ANIMATIONS */
+.fade-up{animation:fadeUp .45s ease forwards}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--                 MAIN WEBSITE                    -->
+<!-- ═══════════════════════════════════════════════ -->
+<div id="website">
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <div class="logo-wrap" onclick="navHome()">
+        <div class="logo-circle">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <circle cx="10" cy="10" r="8" stroke="#8D14AB" stroke-width="1.5"/>
+            <path d="M7 10 Q10 6 13 10 Q10 14 7 10Z" fill="#C084FC" opacity=".7"/>
+          </svg>
+        </div>
+        <span class="logo-text">VELUNE</span>
+      </div>
+
+      <ul class="nav-links" id="nav-links">
+        <li><a onclick="navHome();scrollTo('shop')" data-en="Collection" data-ar="المجموعة">Collection</a></li>
+        <li><a onclick="navHome();scrollTo('sold-section')" data-en="Sold Items" data-ar="المباعة">Sold Items</a></li>
+        <li><a onclick="navHome();scrollTo('order-section')" data-en="Order" data-ar="الطلب">Order</a></li>
+      </ul>
+
+      <div class="nav-right">
+        <!-- Language Toggle -->
+        <div class="lang-toggle">
+          <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
+          <button class="lang-btn ar" id="btn-ar" onclick="setLang('ar')">ع</button>
+        </div>
+        <!-- Admin -->
+        <button class="nav-icon-btn" onclick="showView('admin-login')" title="Admin">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        </button>
+        <!-- Mobile hamburger -->
+        <button class="hamburger-btn" id="hamburger" onclick="openMobileMenu()">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobile-menu" onclick="closeMobileMenu()">
+    <div class="mobile-menu-inner" onclick="event.stopPropagation()">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+        <span style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--violet);font-weight:600">VELUNE</span>
+        <div class="lang-toggle">
+          <button class="lang-btn active" id="mob-btn-en" onclick="setLang('en')">EN</button>
+          <button class="lang-btn ar" id="mob-btn-ar" onclick="setLang('ar')">ع</button>
+        </div>
+      </div>
+      <div class="mobile-menu-link" onclick="closeMobileMenu();navHome();scrollTo('shop')" data-en="✦ Collection" data-ar="✦ المجموعة">✦ Collection</div>
+      <div class="mobile-menu-link" onclick="closeMobileMenu();navHome();scrollTo('sold-section')" data-en="✦ Sold Items" data-ar="✦ المباعة">✦ Sold Items</div>
+      <div class="mobile-menu-link" onclick="closeMobileMenu();navHome();scrollTo('order-section')" data-en="✦ Order" data-ar="✦ الطلب">✦ Order</div>
+      <div class="mobile-menu-link" onclick="closeMobileMenu();showView('admin-login')" data-en="⚙ Admin Panel" data-ar="⚙ لوحة الإدارة">⚙ Admin Panel</div>
+    </div>
+  </div>
+
+  <!-- HOME -->
+  <div id="home-view">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-content fade-up">
+        <p class="hero-eyebrow" data-en="New Collection" data-ar="مجموعة جديدة">New Collection</p>
+        <h1 data-en="Dressed in<br><span>Velune</span>" data-ar="ارتدي<br><span>فيلون</span>">Dressed in<br><span>Velune</span></h1>
+        <p class="hero-sub" data-en="Curated pieces for the woman who moves through life with grace. Soft textures, feminine silhouettes, timeless charm." data-ar="قطع مختارة بعناية للمرأة التي تعيش حياتها بأناقة. أقمشة ناعمة، تصاميم أنثوية، وسحر لا يتقادم.">Curated pieces for the woman who moves through life with grace. Soft textures, feminine silhouettes, timeless charm.</p>
+        <button class="btn-primary" onclick="scrollTo('shop')" data-en="Shop Now" data-ar="تسوقي الآن">Shop Now</button>
+        <button class="btn-outline" onclick="scrollTo('sold-section')" data-en="Sold Items" data-ar="المباعة">Sold Items</button>
+      </div>
+    </section>
+
+    <!-- ORDER BANNER -->
+    <section class="order-banner" id="order-section">
+      <div class="order-banner-inner">
+        <p class="order-eyebrow" data-en="How to Order" data-ar="طريقة الطلب">How to Order</p>
+        <p class="order-title" id="order-title-text">Love a piece? Screenshot it or note the <strong>Product ID</strong> and reach us on WhatsApp.</p>
+        <div class="wa-pill" onclick="openWhatsApp()">
+          <div class="wa-dot">W</div>
+          <span data-en="WhatsApp: 4488" data-ar="واتساب: 4488">WhatsApp: <strong>4488</strong></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUCTS SECTION -->
+    <section class="products-section" id="shop">
+      <div class="section-header">
+        <p class="section-eyebrow" data-en="All Pieces" data-ar="جميع القطع">All Pieces</p>
+        <h2 class="section-title" data-en="The Collection" data-ar="المجموعة">The Collection</h2>
+        <div class="section-divider"></div>
+      </div>
+      <div class="filters-row" id="filter-row">
+        <button class="filter-btn active" onclick="applyFilter('all',this)" data-en="All" data-ar="الكل">All</button>
+        <button class="filter-btn" onclick="applyFilter('available',this)" data-en="Available" data-ar="متاح">Available</button>
+      </div>
+      <div id="products-grid"></div>
+    </section>
+
+    <!-- SOLD SECTION -->
+    <section class="sold-section hidden" id="sold-section">
+      <div class="sold-section-inner">
+        <div class="section-header">
+          <p class="section-eyebrow" data-en="No Longer Available" data-ar="غير متوفر حالياً">No Longer Available</p>
+          <h2 class="section-title" data-en="Sold Items" data-ar="القطع المباعة">Sold Items</h2>
+          <div class="section-divider"></div>
+        </div>
+        <div class="products-grid" id="sold-grid"></div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-inner">
+        <div class="foot-grid">
+          <div>
+            <p class="foot-brand">Velune</p>
+            <p class="foot-desc" data-en="A boutique curated for the modern feminine soul. Each piece is chosen with intention — soft, elegant, and beautifully yours." data-ar="بوتيك مختار لروح الأنوثة الحديثة. كل قطعة تُختار بعناية — ناعمة، أنيقة، ولكِ بامتياز.">A boutique curated for the modern feminine soul. Each piece is chosen with intention.</p>
+          </div>
+          <div>
+            <p class="foot-col-title" data-en="Shop" data-ar="تسوقي">Shop</p>
+            <ul class="foot-links">
+              <li data-en="Our Collection" data-ar="مجموعتنا" onclick="navHome();scrollTo('shop')">Our Collection</li>
+              <li data-en="Sold Items" data-ar="المباعة" onclick="navHome();scrollTo('sold-section')">Sold Items</li>
+              <li data-en="How to Order" data-ar="طريقة الطلب" onclick="navHome();scrollTo('order-section')">How to Order</li>
+            </ul>
+          </div>
+          <div>
+            <p class="foot-col-title" data-en="Connect" data-ar="تواصلي">Connect</p>
+            <ul class="foot-links">
+              <li data-en="WhatsApp" data-ar="واتساب" onclick="openWhatsApp()">WhatsApp</li>
+              <li data-en="Instagram" data-ar="انستقرام">Instagram</li>
+            </ul>
+          </div>
+        </div>
+        <div class="foot-bottom">
+          <span data-en="© 2025 VELUNE. All rights reserved." data-ar="© 2025 فيلون. جميع الحقوق محفوظة.">© 2025 VELUNE. All rights reserved.</span>
+          <span data-en="Crafted with elegance" data-ar="صُنع بأناقة">Crafted with elegance</span>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+</div>
+
+<!-- PRODUCT MODAL -->
+<div id="modal" onclick="handleModalClick(event)">
+  <div class="modal-box">
+    <div class="modal-gallery">
+      <div id="modal-main-img"></div>
+      <div class="modal-thumbs" id="modal-thumbs"></div>
+    </div>
+    <div class="modal-details">
+      <div class="modal-header">
+        <p class="modal-id" id="modal-id-text"></p>
+        <h2 class="modal-title" id="modal-title-text"></h2>
+        <div id="modal-status-badge" class="modal-status-badge"></div>
+      </div>
+      <p class="modal-price" id="modal-price-text"></p>
+      <div id="modal-meas-wrap" class="modal-meas-wrap">
+        <p class="meas-title" data-en="Measurements" data-ar="المقاسات">Measurements</p>
+        <div id="modal-meas-grid"></div>
+      </div>
+      <div id="modal-notes-wrap" class="modal-notes-wrap">
+        <p class="notes-title" data-en="Notes" data-ar="ملاحظات">Notes</p>
+        <p id="modal-notes-text"></p>
+      </div>
+      <div style="margin-top:auto;padding-top:16px;border-top:1px solid rgba(176,130,210,0.1)">
+        <p style="font-size:12px;color:var(--text-soft);text-align:center" data-en="Like this piece? Screenshot or note the ID above and message us on WhatsApp." data-ar="تحبين هذه القطعة؟ خذي لقطة شاشة أو اكتبي الرقم وتواصلي معنا على واتساب.">Like this piece? Screenshot or note the ID above and message us on WhatsApp.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN LOGIN -->
+<div class="admin-login-view" id="admin-login">
+  <div class="login-card">
+    <h2 class="login-title" data-en="Admin Login" data-ar="دخول الإدارة">Admin Login</h2>
+    <p class="login-sub" data-en="Manage your VELUNE store" data-ar="أدِري متجر فيلون">Manage your VELUNE store</p>
+    <form onsubmit="doLogin(event)">
+      <div id="l-error"></div>
+      <div class="form-group">
+        <label class="form-label" data-en="Email" data-ar="البريد الإلكتروني">Email</label>
+        <input type="email" class="form-input" id="l-email" required/>
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-en="Password" data-ar="كلمة المرور">Password</label>
+        <input type="password" class="form-input" id="l-password" required/>
+      </div>
+      <button type="submit" class="login-btn" data-en="Sign In" data-ar="دخول">Sign In</button>
+    </form>
+    <div class="login-back">
+      <a onclick="showView('website')" data-en="Back to shop" data-ar="العودة للمتجر">Back to shop</a>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN DASHBOARD -->
+<div class="admin-dashboard-view" id="admin-dashboard">
+  <div class="admin-sidebar">
+    <div class="admin-logo-area">
+      <div class="admin-logo">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M7 10 Q10 6 13 10 Q10 14 7 10Z" fill="currentColor" opacity=".7"/>
+        </svg>
+        <span>VELUNE</span>
+      </div>
+    </div>
+    <div class="a-nav">
+      <div class="a-nav-item active" onclick="showAdminPage('overview',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        <span data-en="Overview" data-ar="نظرة عامة">Overview</span>
+      </div>
+      <div class="a-nav-item" onclick="showAdminPage('products',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
+        <span data-en="Products" data-ar="المنتجات">Products</span>
+      </div>
+      <div class="a-nav-item" onclick="showAdminPage('add',this);resetForm()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+        <span data-en="Add Product" data-ar="إضافة منتج">Add Product</span>
+      </div>
+    </div>
+    <div class="a-logout">
+      <div class="a-nav-item" onclick="doLogout()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        <span data-en="Logout" data-ar="خروج">Logout</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="admin-content">
+    <div class="admin-top-bar">
+      <h1 style="font-size:18px;color:var(--text-dark);font-weight:500">VELUNE Admin</h1>
+      <div class="admin-user-info">
+        <div class="admin-user-avatar">A</div>
+        <span style="font-size:13px;color:var(--text-mid)" id="admin-user-email"></span>
+      </div>
+    </div>
+
+    <div class="admin-pages">
+
+      <!-- OVERVIEW PAGE -->
+      <section class="admin-page active" id="page-overview">
+        <div class="a-page-header">
+          <h1 class="a-page-title" data-en="Dashboard" data-ar="لوحة التحكم">Dashboard</h1>
+          <p class="a-page-sub" data-en="Your VELUNE store at a glance." data-ar="نظرة سريعة على متجر فيلون.">Your VELUNE store at a glance.</p>
+        </div>
+        <div class="stat-grid" id="stat-grid"></div>
+        <div class="a-card">
+          <h3 style="font-size:18px;color:var(--text-dark);margin-bottom:16px" data-en="Recent Products" data-ar="أحدث المنتجات">Recent Products</h3>
+          <div id="recent-list" style="overflow-x:auto"></div>
+        </div>
+      </section>
+
+      <!-- PRODUCTS PAGE -->
+      <section class="admin-page" id="page-products">
+        <div class="a-page-header">
+          <h1 class="a-page-title" data-en="All Products" data-ar="جميع المنتجات">All Products</h1>
+          <p class="a-page-sub" data-en="Manage your inventory." data-ar="إدارة المخزون.">Manage your inventory.</p>
+        </div>
+        <div class="a-card" style="overflow-x:auto">
+          <table class="a-table">
+            <thead><tr>
+              <th data-en="Image" data-ar="صورة">Image</th>
+              <th data-en="ID" data-ar="الرقم">ID</th>
+              <th data-en="Name" data-ar="الاسم">Name</th>
+              <th data-en="Price" data-ar="السعر">Price</th>
+              <th data-en="Status" data-ar="الحالة">Status</th>
+              <th data-en="Actions" data-ar="إجراءات">Actions</th>
+            </tr></thead>
+            <tbody id="admin-tbody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ADD / EDIT PAGE -->
+      <section class="admin-page" id="page-add">
+        <div class="a-page-header">
+          <h1 class="a-page-title" id="add-page-title" data-en="Add New Product" data-ar="إضافة منتج جديد">Add New Product</h1>
+          <p class="a-page-sub" data-en="Fill in the product details below." data-ar="أدخلي تفاصيل المنتج أدناه.">Fill in the product details below.</p>
+        </div>
+        <div class="a-card">
+          <input type="hidden" id="edit-id"/>
+
+          <!-- Images -->
+          <div class="form-group">
+            <label class="form-label" data-en="Product Images (Square)" data-ar="صور المنتج (مربعة)">Product Images (Square)</label>
+            <div class="upload-area" onclick="document.getElementById('img-file').click()">
+              <div class="upload-icon">🌸</div>
+              <p class="upload-text" data-en="Click to upload images — square format recommended" data-ar="اضغطي للرفع — يُفضل النسبة المربعة">Click to upload images — square format recommended</p>
+            </div>
+            <input type="file" id="img-file" accept="image/*" multiple style="display:none" onchange="handleUpload(this)"/>
+            <div class="preview-strip" id="preview-strip"></div>
+          </div>
+
+          <!-- Name & Price -->
+          <div class="form-row-2">
+            <div class="form-group">
+              <label class="form-label" data-en="Product Name" data-ar="اسم المنتج">Product Name</label>
+              <input class="form-input" id="f-name" type="text" placeholder="e.g. Lilac Linen Dress"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label" data-en="Price" data-ar="السعر">Price</label>
+              <input class="form-input" id="f-price" type="text" placeholder="e.g. 45 SAR"/>
+            </div>
+          </div>
+
+          <!-- Category & Status -->
+          <div class="form-row-2">
+            <div class="form-group">
+              <label class="form-label" data-en="Category" data-ar="الفئة">Category</label>
+              <select class="form-input form-select" id="f-cat" onchange="toggleMeasFields()">
+                <option value="top">Top / Jacket / Sweater</option>
+                <option value="bottom">Skirt / Pants</option>
+                <option value="dress">Dress</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" data-en="Status" data-ar="الحالة">Status</label>
+              <select class="form-input form-select" id="f-status">
+                <option value="available">Available</option>
+                <option value="sold">Sold</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- TOP MEASUREMENTS -->
+          <div id="meas-top">
+            <p class="form-label" style="margin-bottom:12px;margin-top:4px">Measurements (cm)</p>
+            <div class="form-row-2">
+              <div class="form-group"><label class="form-label">Shoulder</label><input class="form-input" id="m-shoulder" type="text" placeholder="cm"/></div>
+              <div class="form-group"><label class="form-label">Bust</label><input class="form-input" id="m-bust" type="text" placeholder="cm"/></div>
+            </div>
+            <div class="form-row-2">
+              <div class="form-group"><label class="form-label">Waist</label><input class="form-input" id="m-waist" type="text" placeholder="cm"/></div>
+              <div class="form-group"><label class="form-label">Length</label><input class="form-input" id="m-length" type="text" placeholder="cm"/></div>
+            </div>
+            <div class="form-group"><label class="form-label">Sleeve Length</label><input class="form-input" id="m-sleeve" type="text" placeholder="cm"/></div>
+          </div>
+
+          <!-- BOTTOM/DRESS MEASUREMENTS -->
+          <div id="meas-bottom" class="hidden">
+            <p class="form-label" style="margin-bottom:12px;margin-top:4px">Measurements (cm)</p>
+            <div class="form-row-2">
+              <div class="form-group"><label class="form-label">Waist</label><input class="form-input" id="m-bwaist" type="text" placeholder="cm"/></div>
+              <div class="form-group"><label class="form-label">Hip</label><input class="form-input" id="m-hip" type="text" placeholder="cm"/></div>
+            </div>
+            <div class="form-row-2">
+              <div class="form-group"><label class="form-label">Length</label><input class="form-input" id="m-blength" type="text" placeholder="cm"/></div>
+              <div class="form-group"><label class="form-label">Custom Note</label><input class="form-input" id="m-custom" type="text" placeholder="e.g. Inseam 70cm"/></div>
+            </div>
+          </div>
+
+          <!-- Notes -->
+          <div class="form-group" style="margin-top:6px">
+            <label class="form-label" data-en="Product Notes (optional)" data-ar="ملاحظات المنتج (اختياري)">Product Notes (optional)</label>
+            <textarea class="form-input form-textarea" id="f-notes" placeholder="e.g. True to size. Dry clean only."></textarea>
+          </div>
+
+          <div style="display:flex;gap:12px;margin-top:10px;flex-wrap:wrap">
+            <button class="btn-primary" onclick="saveProduct()" data-en="Save Product" data-ar="حفظ المنتج">Save Product</button>
+            <button class="btn-outline" style="margin-inline-start:0" onclick="resetForm();showAdminPage('products')" data-en="Cancel" data-ar="إلغاء">Cancel</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script type="module">
+// ═══════════════════════════════════════════════
+//         VELUNE SUPABASE APP STATE
+// ═══════════════════════════════════════════════
+let lang = 'en';
+let products = [];
+let activeFilter = 'all';
+let uploadedImgs = [];
+let editingId = null;
+let supabaseReady = false;
+let currentUser = null;
+let supabaseClient = null;
+
+const WHATSAPP_NUMBER = '4488';
+
+// ── INITIALIZE ─────────────────────────────────
+document.addEventListener('supabaseReady', async () => {
+  supabaseClient = window.supabase;
+  supabaseReady = true;
+  console.log('✅ Supabase initialized');
+  listenToProducts();
+});
+
+// ── FIREBASE/SUPABASE LISTEN ──────────────────
+async function listenToProducts() {
+  if (!supabaseReady) return;
+  try {
+    const { data, error } = await supabaseClient
+      .from('products')
+      .select('*')
+      .order('created_at', { ascending: false });
+    
+    if (error) throw error;
+    
+    products = data || [];
+    renderProducts();
+    if (document.getElementById('admin-tbody')) renderAdminTable();
+    if (document.getElementById('stat-grid')?.children.length) renderStats();
+    
+    // Subscribe to realtime updates
+    supabaseClient
+      .channel('products')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'products' }, (payload) => {
+        console.log('🔄 Product update:', payload);
+        listenToProducts();
+      })
+      .subscribe();
+  } catch(e) {
+    console.error('❌ Products listen error:', e);
+    loadLocalProducts();
+  }
+}
+
+// ── LOCAL FALLBACK ─────────────────────────────
+function loadLocalProducts() {
+  const saved = localStorage.getItem('velune_products');
+  products = saved ? JSON.parse(saved) : sampleProducts();
+  renderProducts();
+}
+
+function saveLocal() {
+  localStorage.setItem('velune_products', JSON.stringify(products));
+}
+
+// ── LANGUAGE ───────────────────────────────────
+function setLang(l) {
+  lang = l;
+  document.getElementById('html-root').dir = l === 'ar' ? 'rtl' : 'ltr';
+  document.getElementById('btn-en').classList.toggle('active', l === 'en');
+  document.getElementById('btn-ar').classList.toggle('active', l === 'ar');
+  document.getElementById('mob-btn-en').classList.toggle('active', l === 'en');
+  document.getElementById('mob-btn-ar').classList.toggle('active', l === 'ar');
+  updateAllText();
+}
+
+function updateAllText() {
+  document.querySelectorAll('[data-en],[data-ar]').forEach(el => {
+    const txt = el.getAttribute('data-' + lang);
+    if (txt) el.textContent = txt;
+  });
+}
+
+// ── VIEW NAVIGATION ────────────────────────────
+function showView(v) {
+  document.getElementById('website').style.display = v === 'website' ? 'block' : 'none';
+  document.getElementById('admin-login').classList.toggle('show', v === 'admin-login');
+  document.getElementById('admin-dashboard').classList.toggle('show', v === 'admin-dashboard');
+  if (v === 'website') closeMobileMenu();
+}
+
+function navHome() {
+  showView('website');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function scrollTo(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth' });
+}
+
+function openMobileMenu() {
+  document.getElementById('mobile-menu').classList.add('open');
+}
+
+function closeMobileMenu() {
+  document.getElementById('mobile-menu').classList.remove('open');
+}
+
+function openWhatsApp() {
+  const msg = lang === 'ar' ? 'اهتم بمنتج من VELUNE' : 'I\'m interested in a VELUNE product';
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`,'_blank');
+}
+
+// ── PRODUCTS RENDER ────────────────────────────
+function renderProducts() {
+  const avail = products.filter(p => p.status === 'available');
+  const sold = products.filter(p => p.status === 'sold');
+
+  const grid = document.getElementById('products-grid');
+  const soldGrid = document.getElementById('sold-grid');
+  const soldSec = document.getElementById('sold-section');
+
+  const displayList = activeFilter === 'available' ? avail : products;
+  grid.className = 'products-grid';
+  grid.innerHTML = displayList.length
+    ? displayList.map(productCardHTML).join('')
+    : `<div class="empty-state" style="grid-column:1/-1"><span class="empty-icon">🌸</span><p class="empty-msg">${lang==='ar'?'لا توجد منتجات':'No products yet'}</p></div>`;
+
+  if (sold.length) {
+    soldSec.classList.remove('hidden');
+    soldGrid.innerHTML = sold.map(productCardHTML).join('');
+  } else {
+    soldSec.classList.add('hidden');
+  }
+}
+
+function productCardHTML(p) {
+  const sold = p.status === 'sold';
+  const img = p.images && p.images[0]
+    ? `<img src="${p.images[0]}" alt="${p.name||''}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=img-placeholder>🌸</div>'">`
+    : `<div class="img-placeholder">🌸</div>`;
+  const soldLabel = lang === 'ar' ? 'مباع' : 'SOLD';
+  const qvLabel = lang === 'ar' ? 'عرض سريع ✦' : 'Quick View ✦';
+  const availLabel = lang === 'ar' ? 'متاح' : 'Available';
+  const statusLabel = sold ? (lang==='ar'?'مباع':'Sold') : availLabel;
+
+  return `<div class="product-card${sold?' sold-card':''}" onclick="openModal('${p.id}')">
+    <div class="img-wrap">
+      ${img}
+      ${sold ? `<span class="sold-badge">${soldLabel}</span>` : ''}
+      <button class="qv-btn">${qvLabel}</button>
+    </div>
+    <div class="p-info">
+      <p class="p-id">${p.product_id||p.id}</p>
+      <p class="p-name">${p.name||''}</p>
+      <div class="p-footer">
+        <span class="p-price">${p.price||''}</span>
+        <span class="p-status ${sold?'s-sold':'s-avail'}">${statusLabel}</span>
+      </div>
+    </div>
+  </div>`;
+}
+
+function applyFilter(f, btn) {
+  activeFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderProducts();
+}
+
+// ── MODAL ──────────────────────────────────────
+function openModal(id) {
+  const p = products.find(x => x.id === id);
+  if (!p) return;
+
+  document.getElementById('modal-id-text').textContent = p.product_id || p.id;
+  document.getElementById('modal-title-text').textContent = p.name || '';
+  document.getElementById('modal-price-text').textContent = p.price || '';
+
+  const sb = document.getElementById('modal-status-badge');
+  const sold = p.status === 'sold';
+  sb.textContent = sold ? (lang==='ar'?'مباع':'Sold Out') : (lang==='ar'?'متاح':'Available');
+  sb.className = 'modal-status-badge ' + (sold ? 's-sold' : 's-avail');
+
+  // Images
+  const imgs = (p.images||[]).filter(Boolean);
+  const mainEl = document.getElementById('modal-main-img');
+  mainEl.innerHTML = imgs.length
+    ? `<img src="${imgs[0]}" alt="${p.name||''}" style="width:100%;height:100%;object-fit:cover">`
+    : `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:64px;background:var(--blush-light)">🌸</div>`;
+  document.getElementById('modal-thumbs').innerHTML = imgs.map((src,i) =>
+    `<div class="modal-thumb${i===0?' active':''}" onclick="switchModalImg('${src}',this)"><img src="${src}" alt=""/></div>`
+  ).join('');
+
+  // Measurements
+  const m = p.measurements || {};
+  const cat = p.category || 'top';
+  const measLabels = {
+    en: { shoulder:'Shoulder',bust:'Bust',waist:'Waist',length:'Length',sleeve:'Sleeve',hip:'Hip',custom:'Custom' },
+    ar: { shoulder:'الكتف',bust:'الصدر',waist:'الخصر',length:'الطول',sleeve:'طول الكم',hip:'الوركين',custom:'مخصص' }
+  };
+  const keys = cat==='top' ? ['shoulder','bust','waist','length','sleeve']
+    : cat==='bottom' ? ['waist','hip','length','custom']
+    : ['waist','hip','length'];
+  const measGrid = document.getElementById('modal-meas-grid');
+  measGrid.innerHTML = keys.filter(k=>m[k]).map(k=>
+    `<div class="meas-item"><p class="meas-label">${measLabels[lang][k]||k}</p><p class="meas-val">${m[k]} ${lang==='ar'?'سم':'cm'}</p></div>`
+  ).join('');
+  document.getElementById('modal-meas-wrap').style.display = keys.some(k=>m[k]) ? 'block' : 'none';
+
+  // Notes
+  const nw = document.getElementById('modal-notes-wrap');
+  if (p.notes) {
+    document.getElementById('modal-notes-text').textContent = p.notes;
+    nw.classList.remove('hidden');
+  } else { nw.classList.add('hidden'); }
+
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function switchModalImg(src, el) {
+  document.getElementById('modal-main-img').innerHTML = `<img src="${src}" style="width:100%;height:100%;object-fit:cover">`;
+  document.querySelectorAll('.modal-thumb').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function handleModalClick(e) {
+  if (e.target === document.getElementById('modal')) closeModal();
+}
+
+// ── ADMIN LOGIN ────────────────────────────────
+async function doLogin(e) {
+  e.preventDefault();
+  const email = document.getElementById('l-email').value.trim();
+  const password = document.getElementById('l-password').value;
+  const err = document.getElementById('l-error');
+  
+  try {
+    const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+    if (error) throw error;
+    
+    currentUser = data.user;
+    document.getElementById('admin-user-email').textContent = currentUser.email;
+    err.classList.add('hidden');
+    showView('admin-dashboard');
+    renderStats();
+  } catch(e) {
+    console.error('Login error:', e);
+    err.classList.remove('hidden');
+    err.textContent = lang==='ar' ? 'بيانات غير صحيحة.' : 'Invalid credentials.';
+  }
+}
+
+async function doLogout() {
+  try {
+    await supabaseClient.auth.signOut();
+    currentUser = null;
+    showView('website');
+    document.getElementById('l-email').value = '';
+    document.getElementById('l-password').value = '';
+  } catch(e) {
+    console.error('Logout error:', e);
+  }
+}
+
+// ── ADMIN PAGES ────────────────────────────────
+function showAdminPage(page, el) {
+  document.querySelectorAll('.admin-page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.a-nav-item').forEach(i => i.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  if (el) el.classList.add('active');
+  if (page === 'products') renderAdminTable();
+  if (page === 'overview') renderStats();
+}
+
+function renderStats() {
+  const total = products.length;
+  const avail = products.filter(p=>p.status==='available').length;
+  const sold = products.filter(p=>p.status==='sold').length;
+  const labels = lang==='ar'
+    ? ['إجمالي المنتجات','متاح','مباع']
+    : ['Total Products','Available','Sold'];
+  document.getElementById('stat-grid').innerHTML = [
+    [total, labels[0]], [avail, labels[1]], [sold, labels[2]]
+  ].map(([n,l]) => `<div class="stat-tile"><p class="stat-num">${n}</p><p class="stat-lbl">${l}</p></div>`).join('');
+
+  const recent = products.slice(0,5);
+  const h = { en:['ID','Name','Price','Status'], ar:['الرقم','الاسم','السعر','الحالة'] }[lang];
+  document.getElementById('recent-list').innerHTML = `
+    <table class="a-table">
+      <thead><tr>${h.map(t=>`<th>${t}</th>`).join('')}</tr></thead>
+      <tbody>${recent.map(p=>`<tr>
+        <td style="color:var(--text-soft);font-size:11px">${p.product_id||p.id}</td>
+        <td>${p.name||''}</td>
+        <td style="color:var(--violet)">${p.price||''}</td>
+        <td><span class="badge ${p.status==='sold'?'badge-sold':'badge-avail'}">${p.status==='sold'?(lang==='ar'?'مباع':'Sold'):(lang==='ar'?'متاح':'Available')}</span></td>
+      </tr>`).join('')}</tbody>
+    </table>`;
+}
+
+function renderAdminTable() {
+  const tl = lang==='ar';
+  document.getElementById('admin-tbody').innerHTML = products.map(p => {
+    const sold = p.status === 'sold';
+    const thumb = p.images&&p.images[0]
+      ? `<img src="${p.images[0]}" class="tbl-thumb" alt=""/>`
+      : `<div class="tbl-thumb" style="display:flex;align-items:center;justify-content:center;font-size:18px">🌸</div>`;
+    return `<tr>
+      <td>${thumb}</td>
+      <td style="color:var(--text-soft);font-size:11px">${p.product_id||p.id}</td>
+      <td style="font-weight:500">${p.name||''}</td>
+      <td style="color:var(--violet)">${p.price||''}</td>
+      <td><span class="badge ${sold?'badge-sold':'badge-avail'}">${sold?(tl?'مباع':'Sold'):(tl?'متاح':'Available')}</span></td>
+      <td><div class="action-row">
+        <button class="act-btn btn-edit" onclick="editProduct('${p.id}')">${tl?'تعديل':'Edit'}</button>
+        <button class="btn-toggle ${sold?'tgl-avail':'tgl-sold'}" onclick="toggleStatus('${p.id}')">${sold?(tl?'متاح':'Available'):(tl?'مباع':'Sold')}</button>
+        <button class="act-btn btn-del" onclick="deleteProduct('${p.id}')">${tl?'حذف':'Delete'}</button>
+      </div></td>
+    </tr>`;
+  }).join('');
+}
+
+// ── PRODUCT CRUD ───────────────────────────────
+async function toggleStatus(id) {
+  const p = products.find(x=>x.id===id);
+  if (!p) return;
+  const newStatus = p.status==='sold' ? 'available' : 'sold';
+  
+  try {
+    const { error } = await supabaseClient
+      .from('products')
+      .update({ status: newStatus })
+      .eq('id', id);
+    
+    if (error) throw error;
+    toast(lang==='ar'?`تم تغيير الحالة إلى ${newStatus==='sold'?'مباع':'متاح'}`:`Marked as ${newStatus}`,'success');
+  } catch(e) {
+    console.error('Toggle error:', e);
+    toast(lang==='ar'?'خطأ':'Error','error');
+  }
+}
+
+async function deleteProduct(id) {
+  const msg = lang==='ar' ? 'حذف هذا المنتج؟ لا يمكن التراجع.' : 'Delete this product? Cannot be undone.';
+  if (!confirm(msg)) return;
+  
+  try {
+    const { error } = await supabaseClient
+      .from('products')
+      .delete()
+      .eq('id', id);
+    
+    if (error) throw error;
+    toast(lang==='ar'?'تم حذف المنتج':'Product deleted','success');
+  } catch(e) {
+    console.error('Delete error:', e);
+    toast(lang==='ar'?'خطأ الحذف':'Delete error','error');
+  }
+}
+
+function editProduct(id) {
+  const p = products.find(x=>x.id===id);
+  if (!p) return;
+  editingId = id;
+  document.getElementById('add-page-title').textContent = lang==='ar' ? 'تعديل المنتج' : 'Edit Product';
+  document.getElementById('edit-id').value = id;
+  document.getElementById('f-name').value = p.name||'';
+  document.getElementById('f-price').value = p.price||'';
+  document.getElementById('f-cat').value = p.category||'top';
+  document.getElementById('f-status').value = p.status||'available';
+  document.getElementById('f-notes').value = p.notes||'';
+  uploadedImgs = (p.images||[]).slice();
+  renderPreviews();
+  const m = p.measurements||{};
+  if (p.category==='top') {
+    document.getElementById('m-shoulder').value=m.shoulder||'';
+    document.getElementById('m-bust').value=m.bust||'';
+    document.getElementById('m-waist').value=m.waist||'';
+    document.getElementById('m-length').value=m.length||'';
+    document.getElementById('m-sleeve').value=m.sleeve||'';
+  } else {
+    document.getElementById('m-bwaist').value=m.waist||'';
+    document.getElementById('m-hip').value=m.hip||'';
+    document.getElementById('m-blength').value=m.length||'';
+    document.getElementById('m-custom').value=m.custom||'';
+  }
+  toggleMeasFields();
+  showAdminPage('add');
+  document.querySelectorAll('.a-nav-item')[2].classList.add('active');
+}
+
+async function saveProduct() {
+  const name = document.getElementById('f-name').value.trim();
+  const price = document.getElementById('f-price').value.trim();
+  if (!name||!price) { toast(lang==='ar'?'أدخلي الاسم والسعر':'Please enter name and price','error'); return; }
+  const cat = document.getElementById('f-cat').value;
+  const status = document.getElementById('f-status').value;
+  const notes = document.getElementById('f-notes').value.trim();
+
+  let measurements = {};
+  if (cat==='top') {
+    measurements = {shoulder:document.getElementById('m-shoulder').value,bust:document.getElementById('m-bust').value,waist:document.getElementById('m-waist').value,length:document.getElementById('m-length').value,sleeve:document.getElementById('m-sleeve').value};
+  } else {
+    measurements = {waist:document.getElementById('m-bwaist').value,hip:document.getElementById('m-hip').value,length:document.getElementById('m-blength').value,custom:document.getElementById('m-custom').value};
+  }
+  Object.keys(measurements).forEach(k=>{ if(!measurements[k]) delete measurements[k]; });
+
+  const productData = { name, price, status, category:cat, notes, measurements, images:uploadedImgs };
+
+  try {
+    if (editingId) {
+      const { error } = await supabaseClient
+        .from('products')
+        .update(productData)
+        .eq('id', editingId);
+      if (error) throw error;
+      toast(lang==='ar'?'تم تحديث المنتج':'Product updated!','success');
+    } else {
+      productData.product_id = genId();
+      productData.created_at = new Date().toISOString();
+      const { error } = await supabaseClient
+        .from('products')
+        .insert([productData]);
+      if (error) throw error;
+      toast(lang==='ar'?'تم إضافة المنتج':'Product added!','success');
+    }
+    resetForm();
+    showAdminPage('products');
+  } catch(e) {
+    console.error('Save error:', e);
+    toast(lang==='ar'?'خطأ الحفظ':'Save error','error');
+  }
+}
+
+function resetForm() {
+  editingId = null;
+  uploadedImgs = [];
+  ['f-name','f-price','f-notes','m-shoulder','m-bust','m-waist','m-length','m-sleeve','m-bwaist','m-hip','m-blength','m-custom','edit-id'].forEach(id=>{
+    const el=document.getElementById(id);if(el)el.value='';
+  });
+  document.getElementById('f-cat').value='top';
+  document.getElementById('f-status').value='available';
+  document.getElementById('preview-strip').innerHTML='';
+  toggleMeasFields();
+}
+
+function toggleMeasFields() {
+  const cat = document.getElementById('f-cat').value;
+  document.getElementById('meas-top').classList.toggle('hidden', cat!=='top');
+  document.getElementById('meas-bottom').classList.toggle('hidden', cat==='top');
+}
+
+// ── IMAGE UPLOAD ──────────────────────────────
+function handleUpload(input) {
+  Array.from(input.files).forEach(file => {
+    const reader = new FileReader();
+    reader.onload = e => { uploadedImgs.push(e.target.result); renderPreviews(); };
+    reader.readAsDataURL(file);
+  });
+  input.value = '';
+}
+
+function renderPreviews() {
+  document.getElementById('preview-strip').innerHTML = uploadedImgs.map((src,i)=>
+    `<div class="prev-wrap"><img src="${src}" alt=""/><button class="prev-rm" onclick="removeImg(${i})">✕</button></div>`
+  ).join('');
+}
+
+function removeImg(i) { uploadedImgs.splice(i,1); renderPreviews(); }
+
+// ── TOAST ──────────────────────────────────────
+function toast(msg, type='') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show' + (type?' '+type:'');
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => t.className='toast', 3200);
+}
+
+// ── UTILITIES ──────────────────────────────────
+function genId() {
+  const num = Math.random().toString().slice(2,6).padStart(4,'0');
+  return `VELUNE-${num}`;
+}
+
+function sampleProducts() {
+  return [
+    { id:'VLN-0001', product_id:'VELUNE-0001', name:'Lavender Dream Blouse', price:'45 SAR', status:'available', category:'top', notes:'Lightweight. True to size.', images:['https://images.unsplash.com/photo-1594938298603-c8148c4a3571?w=400&h=400&fit=crop'], measurements:{shoulder:'38',bust:'86',waist:'72',length:'58',sleeve:'52'}, created_at:new Date().toISOString() },
+    { id:'VLN-0002', product_id:'VELUNE-0002', name:'Velvet Violet Mini Dress', price:'62 SAR', status:'available', category:'dress', notes:'Stretch fabric. Size up if between sizes.', images:['https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400&h=400&fit=crop'], measurements:{waist:'68',hip:'92',length:'82'}, created_at:new Date().toISOString() },
+    { id:'VLN-0003', product_id:'VELUNE-0003', name:'Rose Petal Skirt', price:'44 SAR', status:'sold', category:'bottom', notes:'Flowy satin.', images:['https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=400&h=400&fit=crop'], measurements:{waist:'66',hip:'90',length:'70'}, created_at:new Date().toISOString() },
+  ];
+}
+
+// INIT
+renderProducts();
+</script>
+</body>
+</html>
