@@ -553,6 +553,17 @@ footer{background:var(--deep-violet);padding:52px 5vw 24px;color:rgba(255,255,25
         </div>
         <div class="a-card">
           <div class="form-group">
+            <label class="form-label">Product Images (Required)</label>
+            <div class="upload-area" id="upload-area" ondrop="handleDrop(event)" ondragover="event.preventDefault()" ondragleave="event.preventDefault()">
+              <div class="upload-icon">📸</div>
+              <p class="upload-text">Drag images here or click to select</p>
+              <input type="file" id="image-input" multiple accept="image/*" onchange="handleFiles(this.files)" style="display:none"/>
+              <button type="button" onclick="document.getElementById('image-input').click()" class="btn-primary" style="margin-top:12px;padding:8px 20px;font-size:12px">Choose Files</button>
+            </div>
+            <div class="preview-strip" id="preview-strip"></div>
+          </div>
+
+          <div class="form-group">
             <label class="form-label">Product Name</label>
             <input class="form-input" id="f-name" type="text" placeholder="e.g. Lavender Dress"/>
           </div>
@@ -575,10 +586,25 @@ footer{background:var(--deep-violet);padding:52px 5vw 24px;color:rgba(255,255,25
               <option value="sold">Sold</option>
             </select>
           </div>
+
+          <div class="form-group">
+            <label class="form-label">Measurements (Optional)</label>
+            <div class="form-row-2">
+              <input class="form-input" id="f-shoulder" type="text" placeholder="Shoulder (cm)"/>
+              <input class="form-input" id="f-bust" type="text" placeholder="Bust (cm)"/>
+            </div>
+            <div class="form-row-2" style="margin-top:12px">
+              <input class="form-input" id="f-waist" type="text" placeholder="Waist (cm)"/>
+              <input class="form-input" id="f-sleeve" type="text" placeholder="Sleeve Length (cm)"/>
+            </div>
+            <input class="form-input" id="f-length" type="text" placeholder="Length (cm)" style="margin-top:12px"/>
+          </div>
+
           <div class="form-group">
             <label class="form-label">Notes</label>
-            <textarea class="form-input form-textarea" id="f-notes"></textarea>
+            <textarea class="form-input form-textarea" id="f-notes" placeholder="Additional details..."></textarea>
           </div>
+
           <button class="btn-primary" onclick="saveProduct()">Save Product</button>
         </div>
       </section>
@@ -596,6 +622,7 @@ let lang = 'en';
 let products = [];
 let supabaseClient = null;
 let currentUser = null;
+let uploadedImages = [];
 
 const WHATSAPP_NUMBER = '4488';
 
@@ -818,7 +845,19 @@ async function saveProduct() {
     return;
   }
   
+  if (uploadedImages.length === 0) {
+    toast('Please add at least one image', 'error');
+    return;
+  }
+  
   try {
+    const measurements = {};
+    if (document.getElementById('f-shoulder').value) measurements.Shoulder = document.getElementById('f-shoulder').value;
+    if (document.getElementById('f-bust').value) measurements.Bust = document.getElementById('f-bust').value;
+    if (document.getElementById('f-waist').value) measurements.Waist = document.getElementById('f-waist').value;
+    if (document.getElementById('f-sleeve').value) measurements['Sleeve Length'] = document.getElementById('f-sleeve').value;
+    if (document.getElementById('f-length').value) measurements.Length = document.getElementById('f-length').value;
+    
     const { error } = await supabaseClient.from('products').insert([{
       product_id: 'VELUNE-' + Math.random().toString().slice(2,6),
       name,
@@ -826,21 +865,80 @@ async function saveProduct() {
       category: document.getElementById('f-cat').value,
       status: document.getElementById('f-status').value,
       notes: document.getElementById('f-notes').value,
-      images: [],
-      measurements: {},
+      images: uploadedImages,
+      measurements: measurements,
       created_at: new Date().toISOString()
     }]);
     
     if (error) throw error;
     toast('Product added!', 'success');
-    document.getElementById('f-name').value = '';
-    document.getElementById('f-price').value = '';
+    resetAddForm();
     await loadProducts();
     showAdminPage('products');
   } catch(e) {
     console.error(e);
     toast('Error saving product', 'error');
   }
+}
+
+function resetAddForm() {
+  uploadedImages = [];
+  document.getElementById('f-name').value = '';
+  document.getElementById('f-price').value = '';
+  document.getElementById('f-notes').value = '';
+  document.getElementById('f-shoulder').value = '';
+  document.getElementById('f-bust').value = '';
+  document.getElementById('f-waist').value = '';
+  document.getElementById('f-sleeve').value = '';
+  document.getElementById('f-length').value = '';
+  document.getElementById('preview-strip').innerHTML = '';
+  document.getElementById('image-input').value = '';
+}
+
+function handleDrop(e) {
+  e.preventDefault();
+  e.stopPropagation();
+  handleFiles(e.dataTransfer.files);
+}
+
+async function handleFiles(files) {
+  if (!files.length) return;
+  
+  for (let file of files) {
+    if (!file.type.startsWith('image/')) continue;
+    
+    const reader = new FileReader();
+    reader.onload = async (e) => {
+      const dataUrl = e.target.result;
+      uploadedImages.push(dataUrl);
+      
+      // Add preview
+      const preview = document.createElement('div');
+      preview.className = 'prev-wrap';
+      preview.innerHTML = `
+        <img src="${dataUrl}" alt="preview">
+        <button type="button" class="prev-rm" onclick="removeImage(${uploadedImages.length - 1})">✕</button>
+      `;
+      document.getElementById('preview-strip').appendChild(preview);
+      toast(`Image added (${uploadedImages.length})`);
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
+function removeImage(idx) {
+  uploadedImages.splice(idx, 1);
+  renderPreviews();
+}
+
+function renderPreviews() {
+  const strip = document.getElementById('preview-strip');
+  strip.innerHTML = uploadedImages.map((img, i) => `
+    <div class="prev-wrap">
+      <img src="${img}" alt="preview">
+      <button type="button" class="prev-rm" onclick="removeImage(${i})">✕</button>
+    </div>
+  `).join('');
 }
 
 // ============ UI ============
@@ -885,7 +983,14 @@ function setLang(l) {
 function updateText() {
   document.querySelectorAll('[data-en],[data-ar]').forEach(el => {
     const txt = el.getAttribute('data-' + lang);
-    if (txt) el.textContent = txt;
+    if (txt) {
+      // Use innerHTML for elements that may have HTML tags, textContent for plain text
+      if (el.id === 'modal-title-text' || el.classList.contains('serif') || el.tagName === 'H1' || el.tagName === 'H2') {
+        el.innerHTML = txt;
+      } else {
+        el.textContent = txt;
+      }
+    }
   });
 }
 
