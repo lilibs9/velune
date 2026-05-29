@@ -98,8 +98,8 @@ h1 span{color:var(--violet);font-style:italic;font-weight:600}
 .filters-row{display:flex;gap:12px;justify-content:center;margin-bottom:40px;flex-wrap:wrap}
 .filter-btn{padding:8px 18px;border:1.5px solid rgba(176,130,210,0.3);background:transparent;color:var(--text-mid);border-radius:var(--r-lg);font-size:13px;cursor:pointer;transition:all .2s;font-weight:500;font-family:inherit}
 .filter-btn:hover,.filter-btn.active{background:var(--violet);border-color:var(--violet);color:#fff}
-.products-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;max-width:1280px;margin:0 auto}
-.product-card{background:#fff;border:1px solid rgba(176,130,210,0.1);border-radius:var(--r-lg);overflow:hidden;cursor:pointer;transition:all .3s;position:relative}
+.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:20px;max-width:1280px;margin:0 auto}
+.product-card{background:#fff;border:1px solid rgba(176,130,210,0.1);border-radius:var(--r-lg);overflow:hidden;cursor:pointer;transition:all .3s;position:relative;will-change:transform}
 .product-card:hover{transform:translateY(-6px);box-shadow:0 12px 32px rgba(141,20,171,0.12)}
 .product-card.sold-card{opacity:0.6;filter:saturate(0.4)}
 .product-card.sold-card:hover{opacity:0.75;filter:saturate(0.5)}
@@ -129,12 +129,12 @@ h1 span{color:var(--violet);font-style:italic;font-weight:600}
 #modal.open{display:flex}
 .modal-box{background:#fff;border-radius:var(--r-lg);display:grid;grid-template-columns:1fr 1fr;overflow:hidden;max-height:90vh;max-width:900px;width:100%}
 .modal-gallery{background:var(--blush-light);display:flex;flex-direction:column;padding:0}
-#modal-main-img{flex:1;display:flex;align-items:center;justify-content:center;background:var(--soft-lav)}
-.modal-thumbs{display:flex;gap:8px;padding:16px;overflow-x:auto;background:#fff}
+#modal-main-img{flex:1;display:flex;align-items:center;justify-content:center;background:var(--soft-lav);min-height:300px}
+.modal-thumbs{display:flex;gap:8px;padding:16px;overflow-x:auto;background:#fff;-webkit-overflow-scrolling:touch}
 .modal-thumb{width:60px;height:60px;border-radius:var(--r-md);overflow:hidden;cursor:pointer;border:2px solid transparent;transition:all .2s;flex-shrink:0}
 .modal-thumb img{width:100%;height:100%;object-fit:cover}
 .modal-thumb.active{border-color:var(--violet)}
-.modal-details{padding:28px;display:flex;flex-direction:column;overflow-y:auto}
+.modal-details{padding:28px;display:flex;flex-direction:column;overflow-y:auto;-webkit-overflow-scrolling:touch}
 .modal-id{font-size:11px;letter-spacing:0.1em;color:var(--text-soft);text-transform:uppercase;margin-bottom:6px}
 .modal-title{font-size:28px;color:var(--text-dark);font-weight:400;margin-bottom:12px}
 [dir="rtl"] .modal-title{font-family:'Tajawal',sans-serif;font-size:24px;font-weight:700}
@@ -142,16 +142,17 @@ h1 span{color:var(--violet);font-style:italic;font-weight:600}
 .modal-status-badge.s-avail{background:rgba(192,132,252,0.15);color:var(--violet)}
 .modal-status-badge.s-sold{background:rgba(192,80,80,0.15);color:#c05050}
 .modal-price{font-size:18px;color:var(--violet);font-weight:600;margin-bottom:20px}
-.modal-meas-wrap{margin-bottom:20px}
+.modal-meas-wrap{margin-bottom:20px;padding:16px;background:var(--soft-lav);border-radius:var(--r-md)}
 .modal-meas-wrap.hidden{display:none}
 .meas-title{font-size:13px;font-weight:600;color:var(--text-dark);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.05em}
-#modal-meas-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-.meas-item{padding:12px;background:var(--soft-lav);border-radius:var(--r-md);text-align:center}
-.meas-label{font-size:11px;color:var(--text-soft);margin-bottom:4px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em}
-.meas-val{font-size:14px;color:var(--violet);font-weight:600}
-.modal-notes-wrap{margin-bottom:20px}
+#modal-meas-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.meas-item{padding:10px;background:#fff;border-radius:var(--r-md);text-align:center;border:1px solid rgba(176,130,210,0.15)}
+.meas-label{font-size:11px;color:var(--text-soft);margin-bottom:3px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;display:block}
+[dir="rtl"] .meas-label{font-family:'Tajawal',sans-serif;letter-spacing:0}
+.meas-val{font-size:13px;color:var(--violet);font-weight:600;display:block}
+.modal-notes-wrap{margin-bottom:20px;padding:14px;background:var(--blush-light);border-radius:var(--r-md);border-inline-start:3px solid var(--violet)}
 .modal-notes-wrap.hidden{display:none}
-.notes-title{font-size:12px;font-weight:600;color:var(--text-dark);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.05em}
+.notes-title{font-size:12px;font-weight:600;color:var(--text-dark);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.05em}
 #modal-notes-text{font-size:13px;color:var(--text-mid);line-height:1.5;font-style:italic}
 
 /* ADMIN LOGIN */
@@ -269,21 +270,65 @@ footer{background:var(--deep-violet);padding:52px 5vw 24px;color:rgba(255,255,25
 /* RESPONSIVE */
 @media(max-width:900px){
   .modal-box{grid-template-columns:1fr}
+  .modal-details{max-height:60vh}
+  #modal-meas-grid{grid-template-columns:1fr}
   .admin-dashboard-view{flex-direction:column}
   .admin-sidebar{width:100%;flex-direction:row;height:auto}
-  .a-nav{flex-direction:row;padding:0;flex:1;overflow-x:auto}
+  .a-nav{flex-direction:row;padding:0;flex:1;overflow-x:auto;-webkit-overflow-scrolling:touch}
   .a-nav-item{border-inline-start:none;border-bottom:3px solid transparent;padding:14px 12px;flex-shrink:0;white-space:nowrap;font-size:12px}
   .a-nav-item.active{border-bottom-color:var(--blush);border-inline-start:none}
   .admin-pages{padding:18px}
   .stat-grid{grid-template-columns:1fr}
-  #modal-meas-grid{grid-template-columns:1fr}
   .nav-links{display:none}
   .hamburger-btn{display:flex!important}
 }
-@media(max-width:600px){
+@media(max-width:768px){
   .products-grid{grid-template-columns:repeat(2,1fr);gap:12px}
-  .modal-box{max-height:100vh;border-radius:var(--r-md) var(--r-md) 0 0;align-self:flex-end}
-  .login-card{padding:32px 24px}
+  h1{font-size:48px}
+  .modal-box{max-height:95vh;border-radius:var(--r-md) var(--r-md) 0 0;align-self:flex-end}
+}
+@media(max-width:600px){
+  .products-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+  .product-card{border-radius:8px}
+  .img-wrap{aspect-ratio:1}
+  .p-info{padding:10px}
+  .p-name{font-size:13px}
+  .p-price{font-size:12px}
+  .modal-box{max-height:100vh;border-radius:var(--r-md) var(--r-md) 0 0;align-self:flex-end;grid-template-columns:1fr}
+  .modal-details{padding:20px;max-height:65vh}
+  .modal-title{font-size:22px}
+  .modal-price{font-size:16px}
+  .meas-item{padding:8px}
+  .meas-label{font-size:10px}
+  .meas-val{font-size:12px}
+  #modal-meas-grid{grid-template-columns:repeat(2,1fr);gap:8px}
+  .login-card{padding:24px 18px;max-width:100%}
+  h1{font-size:36px}
+  .section-title{font-size:32px}
+  .hero{padding:40px 4vw;min-height:70vh}
+  .order-banner{padding:32px 4vw}
+  .products-section{padding:40px 4vw}
+  .sold-section{padding:40px 4vw}
+  footer{padding:32px 4vw 16px}
+  .foot-grid{grid-template-columns:1fr;gap:24px}
+}
+@media(max-width:480px){
+  nav{padding:0 3vw}
+  .products-grid{grid-template-columns:repeat(2,1fr);gap:8px}
+  .product-card{border-radius:6px}
+  .img-wrap{aspect-ratio:1}
+  .p-info{padding:8px}
+  .p-name{font-size:12px}
+  .p-id{font-size:10px}
+  .p-price{font-size:11px}
+  .modal-title{font-size:18px}
+  .modal-price{font-size:14px}
+  .meas-item{padding:6px;font-size:10px}
+  h1{font-size:28px}
+  .hero-sub{font-size:14px}
+  .section-title{font-size:26px}
+  .hero-eyebrow{font-size:11px}
+  .section-eyebrow{font-size:11px}
 }
 
 .fade-up{animation:fadeUp .45s ease forwards}
@@ -588,16 +633,16 @@ footer{background:var(--deep-violet);padding:52px 5vw 24px;color:rgba(255,255,25
           </div>
 
           <div class="form-group">
-            <label class="form-label">Measurements (Optional)</label>
+            <label class="form-label">Measurements (Optional) - <span style="font-size:11px">اختياري</span></label>
             <div class="form-row-2">
-              <input class="form-input" id="f-shoulder" type="text" placeholder="Shoulder (cm)"/>
-              <input class="form-input" id="f-bust" type="text" placeholder="Bust (cm)"/>
+              <input class="form-input" id="f-shoulder" type="text" placeholder="Shoulder - الكتف (cm)"/>
+              <input class="form-input" id="f-bust" type="text" placeholder="Bust - الصدر (cm)"/>
             </div>
             <div class="form-row-2" style="margin-top:12px">
-              <input class="form-input" id="f-waist" type="text" placeholder="Waist (cm)"/>
-              <input class="form-input" id="f-sleeve" type="text" placeholder="Sleeve Length (cm)"/>
+              <input class="form-input" id="f-waist" type="text" placeholder="Waist - الخصر (cm)"/>
+              <input class="form-input" id="f-sleeve" type="text" placeholder="Sleeve - طول الكم (cm)"/>
             </div>
-            <input class="form-input" id="f-length" type="text" placeholder="Length (cm)" style="margin-top:12px"/>
+            <input class="form-input" id="f-length" type="text" placeholder="Length - الطول (cm)" style="margin-top:12px"/>
           </div>
 
           <div class="form-group">
@@ -675,7 +720,7 @@ function renderProducts() {
 
 function productCard(p) {
   const sold = p.status === 'sold';
-  const img = p.images?.[0] ? `<img src="${p.images[0]}" alt="${p.name}" loading="lazy">` : '<div class="img-placeholder">🌸</div>';
+  const img = p.images?.[0] ? `<img src="${p.images[0]}" alt="${p.name}" loading="lazy" decoding="async">` : '<div class="img-placeholder">🌸</div>';
   return `<div class="product-card${sold ? ' sold-card' : ''}" onclick="openModal('${p.id}')">
     <div class="img-wrap">
       ${img}
@@ -699,7 +744,7 @@ function openModal(id) {
   if (!p) return;
   
   document.getElementById('modal-id-text').textContent = p.product_id || p.id;
-  document.getElementById('modal-title-text').textContent = p.name;
+  document.getElementById('modal-title-text').innerHTML = p.name;
   document.getElementById('modal-price-text').textContent = p.price;
   
   const badge = document.getElementById('modal-status-badge');
@@ -707,12 +752,23 @@ function openModal(id) {
   badge.className = 'modal-status-badge ' + (p.status === 'sold' ? 's-sold' : 's-avail');
   
   const imgs = p.images || [];
-  document.getElementById('modal-main-img').innerHTML = imgs[0] ? `<img src="${imgs[0]}" style="width:100%;height:100%;object-fit:cover">` : '<div style="font-size:64px;display:flex;align-items:center;justify-content:center">🌸</div>';
-  document.getElementById('modal-thumbs').innerHTML = imgs.map((img,i) => `<div class="modal-thumb${i===0?' active':''}" onclick="switchModalImg('${img}',this)"><img src="${img}" alt=""></div>`).join('');
+  document.getElementById('modal-main-img').innerHTML = imgs[0] ? `<img src="${imgs[0]}" style="width:100%;height:100%;object-fit:cover;loading:lazy">` : '<div style="font-size:64px;display:flex;align-items:center;justify-content:center">🌸</div>';
+  document.getElementById('modal-thumbs').innerHTML = imgs.map((img,i) => `<div class="modal-thumb${i===0?' active':''}" onclick="switchModalImg('${img}',this)"><img src="${img}" alt="" loading="lazy"></div>`).join('');
   
+  // Build measurements with Arabic labels
   const m = p.measurements || {};
+  const measMap = {
+    'Shoulder': 'الكتف',
+    'Bust': 'الصدر',
+    'Waist': 'الخصر',
+    'Sleeve Length': 'طول الكم',
+    'Length': 'الطول'
+  };
   const measKeys = Object.keys(m).filter(k => m[k]);
-  document.getElementById('modal-meas-grid').innerHTML = measKeys.map(k => `<div class="meas-item"><p class="meas-label">${k}</p><p class="meas-val">${m[k]} cm</p></div>`).join('');
+  document.getElementById('modal-meas-grid').innerHTML = measKeys.map(k => {
+    const label = lang === 'ar' ? (measMap[k] || k) : k;
+    return `<div class="meas-item"><span class="meas-label">${label}</span><span class="meas-val">${m[k]} cm</span></div>`;
+  }).join('');
   document.getElementById('modal-meas-wrap').style.display = measKeys.length ? 'block' : 'none';
   
   const notesWrap = document.getElementById('modal-notes-wrap');
