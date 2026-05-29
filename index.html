@@ -264,10 +264,14 @@ footer{background:var(--deep-violet);padding:52px 5vw 24px;color:rgba(255,255,25
 .empty-icon{font-size:48px;margin-bottom:14px;display:block}
 .empty-msg{font-size:16px}
 
-/* HIDDEN */
-.hidden{display:none!important}
-.hamburger-btn{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:5px}
-.hamburger-btn span{width:22px;height:1.5px;background:var(--violet);display:block}
+/* IMAGE VIEWER */
+#image-viewer{position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:500;display:none;align-items:center;justify-content:center;padding:20px}
+#image-viewer.open{display:flex}
+.image-viewer-container{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;max-width:90vw;max-height:90vh}
+#viewer-img{max-width:100%;max-height:100%;object-fit:contain;width:auto;height:auto;border-radius:8px}
+.viewer-close-btn{position:fixed;top:20px;right:20px;background:#fff;border:none;color:#000;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:24px;display:flex;align-items:center;justify-content:center;transition:all .2s;z-index:501;font-weight:bold}
+.viewer-close-btn:hover{background:#f0f0f0;transform:scale(1.1)}
+.viewer-nav{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:rgba(255,255,255,0.15);color:#fff;padding:12px 20px;border-radius:50px;font-size:14px;z-index:501;backdrop-filter:blur(10px);display:flex;align-items:center;gap:16px}
 
 /* RESPONSIVE */
 @media(max-width:900px){
@@ -402,7 +406,7 @@ footer{background:var(--deep-violet);padding:52px 5vw 24px;color:rgba(255,255,25
   <section class="hero">
     <div class="hero-content fade-up">
       <p class="hero-eyebrow" data-en="New Collection" data-ar="مجموعة جديدة">New Collection</p>
-      <h1 data-en="Dressed in<br><span>Velune</span>" data-ar="ارتدي<br><span>فيلون</span>">Dressed in<br><span>Velune</span></h1>
+      <h1 data-en="Dressed in<br><span>Velune</span>" data-ar="بوتيك<br><span>فيلون</span>">Dressed in<br><span>Velune</span></h1>
       <p class="hero-sub" data-en="Curated pieces for the woman who moves through life with grace." data-ar="قطع مختارة بعناية للمرأة التي تعيش حياتها بأناقة.">Curated pieces for the woman who moves through life with grace.</p>
       <button class="btn-primary" onclick="scrollTo('shop')" data-en="Shop Now" data-ar="تسوقي الآن">Shop Now</button>
       <button class="btn-outline" onclick="scrollTo('sold-section')" data-en="Sold Items" data-ar="المباعة">Sold Items</button>
@@ -480,12 +484,12 @@ footer{background:var(--deep-violet);padding:52px 5vw 24px;color:rgba(255,255,25
 <!-- PRODUCT MODAL -->
 <div id="modal" onclick="handleModalClick(event)">
   <div class="modal-box">
-    <button class="modal-close-btn" onclick="closeModal()">✕</button>
     <div class="modal-gallery">
-      <div id="modal-main-img"></div>
+      <div id="modal-main-img" style="cursor:pointer" onclick="openImageViewer(event)"></div>
       <div class="modal-thumbs" id="modal-thumbs"></div>
     </div>
     <div class="modal-details">
+      <button class="modal-close-btn" onclick="closeModal()" style="position:static;width:auto;height:auto;background:none;border:none;color:var(--text-dark);font-size:24px;padding:0;margin-bottom:12px;text-align:left">✕</button>
       <p class="modal-id" id="modal-id-text"></p>
       <h2 class="modal-title" id="modal-title-text"></h2>
       <div id="modal-status-badge" class="modal-status-badge"></div>
@@ -500,6 +504,15 @@ footer{background:var(--deep-violet);padding:52px 5vw 24px;color:rgba(255,255,25
       </div>
     </div>
   </div>
+</div>
+
+<!-- FULLSCREEN IMAGE VIEWER -->
+<div id="image-viewer" onclick="handleViewerClick(event)">
+  <button class="viewer-close-btn" onclick="closeImageViewer()">✕</button>
+  <div class="image-viewer-container">
+    <img id="viewer-img" alt="Product Image">
+  </div>
+  <div class="viewer-nav" id="viewer-nav"></div>
 </div>
 
 <!-- ADMIN LOGIN -->
@@ -676,6 +689,8 @@ let products = [];
 let supabaseClient = null;
 let currentUser = null;
 let uploadedImages = [];
+let currentModalImages = [];
+let currentViewerImageIndex = 0;
 
 const WHATSAPP_NUMBER = '4488';
 
@@ -760,8 +775,9 @@ function openModal(id) {
   badge.className = 'modal-status-badge ' + (p.status === 'sold' ? 's-sold' : 's-avail');
   
   const imgs = p.images || [];
-  document.getElementById('modal-main-img').innerHTML = imgs[0] ? `<img src="${imgs[0]}" style="width:100%;height:100%;object-fit:cover;loading:lazy">` : '<div style="font-size:64px;display:flex;align-items:center;justify-content:center">🌸</div>';
-  document.getElementById('modal-thumbs').innerHTML = imgs.map((img,i) => `<div class="modal-thumb${i===0?' active':''}" onclick="switchModalImg('${img}',this)"><img src="${img}" alt="" loading="lazy"></div>`).join('');
+  currentModalImages = imgs;
+  document.getElementById('modal-main-img').innerHTML = imgs[0] ? `<img src="${imgs[0]}" style="width:100%;height:100%;object-fit:cover;loading:lazy;cursor:pointer" onclick="openImageViewer(0)">` : '<div style="font-size:64px;display:flex;align-items:center;justify-content:center">🌸</div>';
+  document.getElementById('modal-thumbs').innerHTML = imgs.map((img,i) => `<div class="modal-thumb${i===0?' active':''}" onclick="switchModalImg('${img}',${i})"><img src="${img}" alt="" loading="lazy"></div>`).join('');
   
   // Build measurements with Arabic labels
   const m = p.measurements || {};
@@ -791,10 +807,10 @@ function openModal(id) {
   document.body.style.overflow = 'hidden';
 }
 
-function switchModalImg(src, el) {
-  document.getElementById('modal-main-img').innerHTML = `<img src="${src}" style="width:100%;height:100%;object-fit:cover">`;
+function switchModalImg(src, idx) {
+  document.getElementById('modal-main-img').innerHTML = `<img src="${src}" style="width:100%;height:100%;object-fit:cover;cursor:pointer" onclick="openImageViewer(${idx})">`;
   document.querySelectorAll('.modal-thumb').forEach(t => t.classList.remove('active'));
-  el.classList.add('active');
+  document.querySelectorAll('.modal-thumb')[idx].classList.add('active');
 }
 
 function closeModal() {
@@ -804,6 +820,57 @@ function closeModal() {
 
 function handleModalClick(e) {
   if (e.target.id === 'modal') closeModal();
+}
+
+// Image Viewer Functions
+function openImageViewer(idx) {
+  currentViewerImageIndex = typeof idx === 'number' ? idx : 0;
+  const img = currentModalImages[currentViewerImageIndex];
+  if (!img) return;
+  
+  document.getElementById('viewer-img').src = img;
+  updateViewerNav();
+  document.getElementById('image-viewer').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeImageViewer() {
+  document.getElementById('image-viewer').classList.remove('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function handleViewerClick(e) {
+  if (e.target.id === 'image-viewer') closeImageViewer();
+}
+
+function updateViewerNav() {
+  const total = currentModalImages.length;
+  const nav = document.getElementById('viewer-nav');
+  if (total > 1) {
+    nav.innerHTML = `
+      <button onclick="prevImage()" style="background:none;border:none;color:#fff;cursor:pointer;font-size:18px;margin-right:12px">← Prev</button>
+      <span>${currentViewerImageIndex + 1} / ${total}</span>
+      <button onclick="nextImage()" style="background:none;border:none;color:#fff;cursor:pointer;font-size:18px;margin-left:12px">Next →</button>
+    `;
+  } else {
+    nav.innerHTML = '';
+  }
+}
+
+function prevImage() {
+  if (currentViewerImageIndex > 0) {
+    currentViewerImageIndex--;
+    document.getElementById('viewer-img').src = currentModalImages[currentViewerImageIndex];
+    updateViewerNav();
+  }
+}
+
+function nextImage() {
+  if (currentViewerImageIndex < currentModalImages.length - 1) {
+    currentViewerImageIndex++;
+    document.getElementById('viewer-img').src = currentModalImages[currentViewerImageIndex];
+    updateViewerNav();
+  }
 }
 
 // ============ ADMIN ============
